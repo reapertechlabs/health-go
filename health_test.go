@@ -63,7 +63,7 @@ func TestHealthHandler(t *testing.T) {
 	require.NoError(t, err)
 
 	res := httptest.NewRecorder()
-	req, err := http.NewRequest("GET", "http://localhost/status", nil)
+	req, err := http.NewRequest("GET", "http://localhost/status", nil) // DevSkim: ignore DS137138
 	require.NoError(t, err)
 
 	err = h.Register(Config{

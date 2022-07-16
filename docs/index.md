@@ -2,16 +2,17 @@
 
 ## Functionality
 
-* Exposes an HTTP handler that retrieves health status of the application
-* Implements some generic checkers for the following services:
-  * RabbitMQ
-  * PostgreSQL
-  * Redis
-  * HTTP
-  * MongoDB
-  * MySQL
-  * gRPC
-  * Memcached
+- Exposes an HTTP handler that retrieves health status of the application
+- Implements some generic checkers for the following services:
+  - RabbitMQ
+  - PostgreSQL
+  - Redis
+  - HTTP
+  - MongoDB
+  - MySQL
+  - gRPC
+  - Memcached
+  - DNS Server Checks _RTLabs Addition_
 
 ## Usage
 
@@ -30,8 +31,8 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/hellofresh/health-go/v4"
-	healthMysql "github.com/hellofresh/health-go/v4/checks/mysql"
+	"github.com/reapertechlabs/health-go/v4"
+	healthMysql "github.com/reapertechlabs/health-go/v4/checks/mysql"
 )
 
 func main() {
@@ -68,6 +69,7 @@ func main() {
 ```
 
 ### HandlerFunc
+
 ```go
 package main
 
@@ -77,8 +79,8 @@ import (
 	"time"
 
 	"github.com/go-chi/chi"
-	"github.com/hellofresh/health-go/v4"
-	healthMysql "github.com/hellofresh/health-go/v4/checks/mysql"
+	"github.com/reapertechlabs/health-go/v4"
+	healthMysql "github.com/reapertechlabs/health-go/v4/checks/mysql"
 )
 
 func main() {
@@ -115,7 +117,7 @@ func main() {
 }
 ```
 
-For more examples please check [here](https://github.com/hellofresh/health-go/blob/master/_examples/server.go)
+For more examples please check [here](https://github.com/reapertechlabs/health-go/blob/master/_examples/server.go)
 
 ## API Documentation
 
@@ -126,12 +128,15 @@ Get the health of the application.
 - Method: `GET`
 - Endpoint: `/status`
 - Request:
+
 ```
 curl localhost:3000/status
 ```
+
 - Response:
 
 HTTP/1.1 200 OK
+
 ```json
 {
   "status": "OK",
@@ -147,6 +152,7 @@ HTTP/1.1 200 OK
 ```
 
 HTTP/1.1 200 OK
+
 ```json
 {
   "status": "Partially Available",
@@ -165,6 +171,7 @@ HTTP/1.1 200 OK
 ```
 
 HTTP/1.1 503 Service Unavailable
+
 ```json
 {
   "status": "Unavailable",

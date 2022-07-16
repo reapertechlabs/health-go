@@ -6,10 +6,11 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/hellofresh/health-go/v4"
-	healthHttp "github.com/hellofresh/health-go/v4/checks/http"
-	healthMySql "github.com/hellofresh/health-go/v4/checks/mysql"
-	healthPg "github.com/hellofresh/health-go/v4/checks/postgres"
+	"github.com/reapertechlabs/health-go/v4"
+	healthDNS "github.com/reapertechlabs/health-go/v4/checks/dns"
+	healthHttp "github.com/reapertechlabs/health-go/v4/checks/http"
+	healthMySql "github.com/reapertechlabs/health-go/v4/checks/mysql"
+	healthPg "github.com/reapertechlabs/health-go/v4/checks/postgres"
 )
 
 func main() {
@@ -34,7 +35,20 @@ func main() {
 		Timeout:   time.Second * 5,
 		SkipOnErr: true,
 		Check: healthHttp.New(healthHttp.Config{
-			URL: `http://example.com`,
+			URL: `https://example.com`,
+		}),
+	})
+
+	// http health check example
+	h.Register(health.Config{
+		Name:      "dns-check",
+		Timeout:   time.Second * 5,
+		SkipOnErr: true,
+		Check: healthDNS.New(healthDNS.Config{
+			Domain:   `example.network`,
+			NSServer: `10.88.0.2`,
+			NSPort:   `53`,
+			FQDN:     "ns1.example.network",
 		}),
 	})
 
@@ -67,7 +81,7 @@ func main() {
 		Timeout:   time.Second * 5,
 		SkipOnErr: true,
 		Check: healthHttp.New(healthHttp.Config{
-			URL: `http://guest:guest@0.0.0.0:32780/api/aliveness-test/%2f`,
+			URL: `https://guest:guest@0.0.0.0:32780/api/aliveness-test/%2f`,
 		}),
 	})
 

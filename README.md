@@ -1,19 +1,21 @@
 # health-go
 
-[![Go Report Card](https://goreportcard.com/badge/github.com/hellofresh/health-go)](https://goreportcard.com/report/github.com/hellofresh/health-go)
-[![Go Doc](https://godoc.org/github.com/hellofresh/health-go?status.svg)](https://godoc.org/github.com/hellofresh/health-go)
+**NOTE: Modified Version of this library to add some RT Labs specific checks. Library paths changed for our convenince.**
 
-* Exposes an HTTP handler that retrieves health status of the application
-* Implements some generic checkers for the following services:
-  * RabbitMQ
-  * PostgreSQL
-  * Redis
-  * HTTP
-  * MongoDB
-  * MySQL
-  * gRPC
-  * Memcached
-  * InfluxDB
+[![Go Report Card](https://goreportcard.com/badge/github.com/reapertechlabs/health-go)](https://goreportcard.com/report/github.com/reapertechlabs/health-go)
+[![Go Doc](https://godoc.org/github.com/reapertechlabs/health-go?status.svg)](https://godoc.org/github.com/reapertechlabs/health-go)
+
+- Exposes an HTTP handler that retrieves health status of the application
+- Implements some generic checkers for the following services:
+  - RabbitMQ
+  - PostgreSQL
+  - Redis
+  - HTTP
+  - MongoDB
+  - MySQL
+  - gRPC
+  - Memcached
+  - InfluxDB - DNS
 
 ## Usage
 
@@ -32,8 +34,8 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/hellofresh/health-go/v4"
-	healthMysql "github.com/hellofresh/health-go/v4/checks/mysql"
+	"github.com/reapertechlabs/health-go/v4"
+	healthMysql "github.com/reapertechlabs/health-go/v4/checks/mysql"
 )
 
 func main() {
@@ -70,6 +72,7 @@ func main() {
 ```
 
 ### HandlerFunc
+
 ```go
 package main
 
@@ -79,8 +82,8 @@ import (
 	"time"
 
 	"github.com/go-chi/chi"
-	"github.com/hellofresh/health-go/v4"
-	healthMysql "github.com/hellofresh/health-go/v4/checks/mysql"
+	"github.com/reapertechlabs/health-go/v4"
+	healthMysql "github.com/reapertechlabs/health-go/v4/checks/mysql"
 )
 
 func main() {
@@ -117,21 +120,26 @@ func main() {
 }
 ```
 
-For more examples please check [here](https://github.com/hellofresh/health-go/blob/master/_examples/server.go)
+For more examples please check [here](https://github.com/reapertechlabs/health-go/blob/master/_examples/server.go)
+
 ## API Documentation
 
 ### `GET /status`
 
 Get the health of the application.
+
 - Method: `GET`
 - Endpoint: `/status`
 - Request:
+
 ```
 curl localhost:3000/status
 ```
+
 - Response:
 
 HTTP/1.1 200 OK
+
 ```json
 {
   "status": "OK",
@@ -147,6 +155,7 @@ HTTP/1.1 200 OK
 ```
 
 HTTP/1.1 200 OK
+
 ```json
 {
   "status": "Partially Available",
@@ -165,6 +174,7 @@ HTTP/1.1 200 OK
 ```
 
 HTTP/1.1 503 Service Unavailable
+
 ```json
 {
   "status": "Unavailable",
@@ -183,6 +193,7 @@ HTTP/1.1 503 Service Unavailable
 ```
 
 ## Contributing
+
 - Fork it
 - Create your feature branch (`git checkout -b my-new-feature`)
 - Commit your changes (`git commit -am 'Add some feature'`)
@@ -190,5 +201,6 @@ HTTP/1.1 503 Service Unavailable
 - Create new Pull Request
 
 ---
-> GitHub [@hellofresh](https://github.com/hellofresh) &nbsp;&middot;&nbsp;
-> Medium [@engineering.hellofresh](https://engineering.hellofresh.com)
+
+> GitHub [@reapertechlabs](https://github.com/reapertechlabs) &nbsp;&middot;&nbsp;
+> Medium [@engineering.reapertechlabs](https://engineering.reapertechlabs.com)

@@ -8,7 +8,7 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/hellofresh/health-go/v4/checks/http"
+	"github.com/reapertechlabs/health-go/v4/checks/http"
 )
 
 const httpURLEnv = "HEALTH_GO_MQ_URL"

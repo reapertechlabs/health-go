@@ -8,7 +8,11 @@ import (
 	"time"
 )
 
-const defaultRequestTimeout = 5 * time.Second
+const (
+	// DefaultTimeout is default timeout many operation in this program will
+	// use.
+	DefaultTimeout time.Duration = 5 * time.Second
+)
 
 // Config is the HTTP checker configuration settings container.
 type Config struct {
@@ -16,6 +20,7 @@ type Config struct {
 	URL string
 	// RequestTimeout is the duration that health check will try to consume published test message.
 	// If not set - 5 seconds
+
 	RequestTimeout time.Duration
 }
 
@@ -25,7 +30,7 @@ type Config struct {
 // - verifying that status code is less than 500
 func New(config Config) func(ctx context.Context) error {
 	if config.RequestTimeout == 0 {
-		config.RequestTimeout = defaultRequestTimeout
+		config.RequestTimeout = DefaultTimeout
 	}
 
 	return func(ctx context.Context) error {
